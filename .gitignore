@@ -21,6 +21,6 @@ npm-debug.log
 *__temp
 node_modules
 docs
-dist
 demo/lib
+package-lock.json
 _pixi-lights
