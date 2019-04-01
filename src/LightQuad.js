@@ -1,5 +1,6 @@
+import createIndicesForQuads from './createIndicesForQuads';
+
 const glCore = PIXI.glCore;
-const utils = PIXI.utils;
 
 /**
  * Helper class to create a quad
@@ -80,7 +81,7 @@ export default class LightQuad
         /*
          * @member {Uint16Array} An array containing the indices of the vertices
          */
-        this.indices = utils.createIndicesForQuads(1);
+        this.indices = createIndicesForQuads(1);
 
         /*
          * @member {glCore.GLBuffer} The vertex buffer
