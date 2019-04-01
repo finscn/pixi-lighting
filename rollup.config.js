@@ -23,14 +23,14 @@ export default {
             name: 'PIXI.lighting',
             freeze: false,
             file: pkg.main,
-            sourcemap: true,
+            sourcemap: false,
             format: 'umd',
             banner
         },
         {
             freeze: false,
             file: pkg.module,
-            sourcemap: true,
+            sourcemap: false,
             format: 'es',
             banner
         },
@@ -48,10 +48,10 @@ export default {
             ]
         }),
         buble(),
-        conditional(process.env.NODE_ENV !== 'development', [
+        conditional([
             uglify({
-                mangle: true,
-                compress: true,
+                mangle: false,
+                compress: false,
                 output: {
                     comments: function(node, comment) {
                         return comment.line === 1;
