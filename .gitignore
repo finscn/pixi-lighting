@@ -1,0 +1,26 @@
+# Idea
+.idea
+
+# Sublime Text files
+*.sublime*
+*.*~*.TMP
+
+# OS temp files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Tool temp files
+npm-debug.log
+*.sw*
+*~
+\#*#
+
+# project ignores
+!.gitkeep
+*__temp
+node_modules
+docs
+dist
+demo/lib
+_pixi-lights

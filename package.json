@@ -1,0 +1,71 @@
+{
+  "name": "pixi-lighting",
+  "version": "2.0.3",
+  "description": "A plugin that adds deferred lighting to Pixi.js",
+  "license": "MIT",
+  "main": "./dist/pixi-lighting.js",
+  "types": "./pixi-lighting.d.ts",
+  "module": "./dist/pixi-lighting.es.js",
+  "author": "Zijun Wei <finscn@gmail.com>",
+  "contributors": [
+  ],
+  "homepage": "https://github.com/finscn/pixi-lighting",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finscn/pixi-lighting.git"
+  },
+  "bugs": {
+    "url": "https://github.com/finscn/pixi-lighting/issues"
+  },
+  "scripts": {
+    "clean": "rimraf dist/* docs/*",
+    "test": "npm run build",
+    "prebuild": "npm run clean",
+    "build": "cross-env NODE_ENV=\"production\" rollup -c",
+    "watch": "cross-env NODE_ENV=\"development\" rollup -cw",
+    "lint": "eslint --fix src",
+    "docs": "jsdoc -c ./jsdoc.conf.json -R README.md",
+    "dev": "http-server . -o",
+    "postversion": "npm run build",
+    "postpublish": "npm run deploy",
+    "predeploy": "npm run copy && npm run docs",
+    "copy": "copyfiles -f \"node_modules/{pixi.js,pixi-layers}/dist/*.{js,map}\" demo/lib",
+    "deploy": "gh-pages -d . -s \"{demo,docs,dist}/**\"",
+    "start": "parallelshell \"npm run watch\" \"npm run dev\""
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "2d",
+    "pixi"
+  ],
+  "files": [
+    "dist/",
+    "pixi-lighting.d.ts"
+  ],
+  "peerDependencies": {
+    "pixi.js": "^4.8.5",
+    "pixi-layers": "^0.1.10"
+  },
+  "devDependencies": {
+    "@pixi/jsdoc-template": "^2.4.0",
+    "copyfiles": "^2.0.0",
+    "cross-env": "^5.1.4",
+    "eslint": "^4.19.1",
+    "gh-pages": "^1.1.0",
+    "http-server": "^0.11.1",
+    "jsdoc": "^3.5.5",
+    "parallelshell": "^3.0.2",
+    "pixi-layers": "^0.1.10",
+    "pixi.js": "^4.7.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.57.1",
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-conditional": "^1.1.1",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-string": "^2.0.2",
+    "rollup-plugin-uglify": "^3.0.0",
+    "uglify-es": "^3.3.9"
+  }
+}
