@@ -13,7 +13,7 @@ export default class LightTarget
         // bak.diffuseTexturee = sprite.diffuseTexture;
 
         sprite.pluginName = LightSpriteRenderer.pluginName;
-        sprite._renderWebGL = LightTarget._renderWebGL;
+        sprite._renderWebGL = LightTarget.prototype._renderWebGL;
         // sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
 
         sprite._lightingBackup = bak;
@@ -37,7 +37,7 @@ export default class LightTarget
         /* eslint-enable camelcase */
     }
 
-    static _renderWebGL(renderer)
+    _renderWebGL(renderer)
     {
         const sprite = this;
 
