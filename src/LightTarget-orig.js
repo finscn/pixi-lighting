@@ -5,39 +5,36 @@ export default class LightTarget
     static applyTo(sprite)
     {
         /* eslint-disable camelcase */
-        const bak = {};
-
-        bak.pluginNamee = sprite.pluginName;
-        bak._renderWebGL = sprite._renderWebGL;
-        bak._texturee = sprite._texture;
-        // bak.diffuseTexturee = sprite.diffuseTexture;
+        sprite._bak_pluginName_LightSprite = sprite.pluginName;
+        sprite._bak__texture_LightSprite = sprite._texture;
+        sprite._bak_diffuseTexture_LightSprite = sprite.diffuseTexture;
+        sprite._bak__renderWebGL_LightSprite = sprite._renderWebGL;
 
         sprite.pluginName = LightSpriteRenderer.pluginName;
-        sprite._renderWebGL = LightTarget._renderWebGL;
-        // sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
-
-        sprite._lightingBackup = bak;
+        sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
+        sprite._renderWebGL = LightTarget.__renderWebGL_Sprite;
         /* eslint-enable camelcase */
     }
 
     static unapplyTo(sprite)
     {
         /* eslint-disable camelcase */
-        if (sprite._lightingBackup)
+        if (sprite._bak__renderWebGL_LightSprite)
         {
-            const bak = sprite._lightingBackup;
+            sprite.pluginName = sprite._bak_pluginName_LightSprite;
+            sprite._texture = sprite._bak__texture_LightSprite;
+            sprite.diffuseTexture = sprite._bak_diffuseTexture_LightSprite;
+            sprite._renderWebGL = sprite._bak__renderWebGL_LightSprite;
 
-            sprite.pluginName = bak.pluginName;
-            sprite._renderWebGL = bak._renderWebGL;
-            sprite._texture = bak._texture;
-            // sprite.diffuseTexture = bak.diffuseTexture;
-
-            sprite._lightingBackup = null;
+            sprite._bak_pluginName_LightSprite = null;
+            sprite._bak__texture_LightSprite = null;
+            sprite._bak_diffuseTexture_LightSprite = null;
+            sprite._bak__renderWebGL_LightSprite = null;
         }
         /* eslint-enable camelcase */
     }
 
-    static _renderWebGL(renderer)
+    static __renderWebGL_Sprite(renderer) // eslint-disable-line camelcase
     {
         const sprite = this;
 

@@ -1,6 +1,6 @@
 /*!
  * pixi-lighting - v2.0.3
- * Compiled Mon, 01 Apr 2019 04:17:06 UTC
+ * Compiled Mon, 08 Apr 2019 12:07:47 UTC
  *
  * pixi-lighting is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -896,36 +896,39 @@
     LightTarget.applyTo = function applyTo (sprite)
     {
         /* eslint-disable camelcase */
-        sprite._bak_pluginName_LightSprite = sprite.pluginName;
-        sprite._bak__texture_LightSprite = sprite._texture;
-        sprite._bak_diffuseTexture_LightSprite = sprite.diffuseTexture;
-        sprite._bak__renderWebGL_LightSprite = sprite._renderWebGL;
+        var bak = {};
+
+        bak.pluginNamee = sprite.pluginName;
+        bak._renderWebGL = sprite._renderWebGL;
+        bak._texturee = sprite._texture;
+        // bak.diffuseTexturee = sprite.diffuseTexture;
 
         sprite.pluginName = LightSpriteRenderer.pluginName;
-        sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
-        sprite._renderWebGL = LightTarget.__renderWebGL_Sprite;
+        sprite._renderWebGL = LightTarget._renderWebGL;
+        // sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
+
+        sprite._lightingBackup = bak;
         /* eslint-enable camelcase */
     };
 
     LightTarget.unapplyTo = function unapplyTo (sprite)
     {
         /* eslint-disable camelcase */
-        if (sprite._bak__renderWebGL_LightSprite)
+        if (sprite._lightingBackup)
         {
-            sprite.pluginName = sprite._bak_pluginName_LightSprite;
-            sprite._texture = sprite._bak__texture_LightSprite;
-            sprite.diffuseTexture = sprite._bak_diffuseTexture_LightSprite;
-            sprite._renderWebGL = sprite._bak__renderWebGL_LightSprite;
+            var bak = sprite._lightingBackup;
 
-            sprite._bak_pluginName_LightSprite = null;
-            sprite._bak__texture_LightSprite = null;
-            sprite._bak_diffuseTexture_LightSprite = null;
-            sprite._bak__renderWebGL_LightSprite = null;
+            sprite.pluginName = bak.pluginName;
+            sprite._renderWebGL = bak._renderWebGL;
+            sprite._texture = bak._texture;
+            // sprite.diffuseTexture = bak.diffuseTexture;
+
+            sprite._lightingBackup = null;
         }
         /* eslint-enable camelcase */
     };
 
-    LightTarget.__renderWebGL_Sprite = function __renderWebGL_Sprite (renderer) // eslint-disable-line camelcase
+    LightTarget._renderWebGL = function _renderWebGL (renderer)
     {
         var sprite = this;
 
