@@ -1,6 +1,6 @@
 /*!
  * pixi-lighting - v2.0.3
- * Compiled Mon, 08 Apr 2019 12:07:47 UTC
+ * Compiled Mon, 08 Apr 2019 12:14:20 UTC
  *
  * pixi-lighting is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -898,7 +898,7 @@ LightTarget.applyTo = function applyTo (sprite)
     // bak.diffuseTexturee = sprite.diffuseTexture;
 
     sprite.pluginName = LightSpriteRenderer.pluginName;
-    sprite._renderWebGL = LightTarget._renderWebGL;
+    sprite._renderWebGL = LightTarget.prototype._renderWebGL;
     // sprite.diffuseTexture = sprite.diffuseTexture || sprite._texture;
 
     sprite._lightingBackup = bak;
@@ -922,7 +922,7 @@ LightTarget.unapplyTo = function unapplyTo (sprite)
     /* eslint-enable camelcase */
 };
 
-LightTarget._renderWebGL = function _renderWebGL (renderer)
+LightTarget.prototype._renderWebGL = function _renderWebGL (renderer)
 {
     var sprite = this;
 
