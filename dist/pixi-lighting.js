@@ -1,6 +1,6 @@
 /*!
  * pixi-lighting - v2.0.3
- * Compiled Mon, 08 Apr 2019 12:14:20 UTC
+ * Compiled Tue, 09 Apr 2019 03:32:08 UTC
  *
  * pixi-lighting is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license

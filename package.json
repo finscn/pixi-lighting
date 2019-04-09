@@ -21,7 +21,7 @@
     "clean": "rimraf dist/* docs/*",
     "test": "npm run build",
     "prebuild": "npm run clean",
-    "build": "cross-env NODE_ENV=\"production\" rollup -c",
+    "build": "cross-env NODE_ENV=\"production\" rollup -c && uglifyjs -c -m --source-map -o dist/pixi-lighting.min.js dist/pixi-lighting.js",
     "watch": "cross-env NODE_ENV=\"development\" rollup -cw",
     "lint": "eslint --fix src",
     "docs": "jsdoc -c ./jsdoc.conf.json -R README.md",
