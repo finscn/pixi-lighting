@@ -7,7 +7,7 @@ export default class LightTarget
         /* eslint-disable camelcase */
         const bak = {};
 
-        bak.pluginNamee = sprite.pluginName;
+        bak.pluginName = sprite.pluginName;
         bak._renderWebGL = sprite._renderWebGL;
         bak._texturee = sprite._texture;
         // bak.diffuseTexturee = sprite.diffuseTexture;
@@ -50,8 +50,11 @@ export default class LightTarget
 
             sprite._texture = diffuseTexture;
 
-            renderer.setObjectRenderer(renderer.plugins.sprite);
-            renderer.plugins.sprite.render(sprite);
+            const plugin = renderer.plugins.sprite;
+            // const plugin = renderer.plugins[sprite._lightingBackup.pluginName];
+
+            renderer.setObjectRenderer(plugin);
+            plugin.render(sprite);
 
             return;
         }
@@ -63,13 +66,19 @@ export default class LightTarget
 
             sprite._texture = normalTexture;
 
-            renderer.setObjectRenderer(renderer.plugins.sprite);
-            renderer.plugins.sprite.render(sprite);
+            const plugin = renderer.plugins.sprite;
+            // const plugin = renderer.plugins[sprite._lightingBackup.pluginName];
+
+            renderer.setObjectRenderer(plugin);
+            plugin.render(sprite);
 
             return;
         }
 
-        renderer.setObjectRenderer(renderer.plugins.lightSprite);
-        renderer.plugins.lightSprite.render(sprite);
+        const plugin = renderer.plugins.lightSprite;
+        // const plugin = renderer.plugins[LightSpriteRenderer.pluginName];
+
+        renderer.setObjectRenderer(plugin);
+        plugin.render(sprite);
     }
 }

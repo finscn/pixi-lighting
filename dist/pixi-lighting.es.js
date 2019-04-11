@@ -1,6 +1,6 @@
 /*!
  * pixi-lighting - v2.0.3
- * Compiled Tue, 09 Apr 2019 03:32:08 UTC
+ * Compiled Tue, 09 Apr 2019 04:11:41 UTC
  *
  * pixi-lighting is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -892,7 +892,7 @@ LightTarget.applyTo = function applyTo (sprite)
     /* eslint-disable camelcase */
     var bak = {};
 
-    bak.pluginNamee = sprite.pluginName;
+    bak.pluginName = sprite.pluginName;
     bak._renderWebGL = sprite._renderWebGL;
     bak._texturee = sprite._texture;
     // bak.diffuseTexturee = sprite.diffuseTexture;
@@ -935,8 +935,11 @@ LightTarget.prototype._renderWebGL = function _renderWebGL (renderer)
 
         sprite._texture = diffuseTexture;
 
-        renderer.setObjectRenderer(renderer.plugins.sprite);
-        renderer.plugins.sprite.render(sprite);
+        var plugin$1 = renderer.plugins.sprite;
+        // const plugin = renderer.plugins[sprite._lightingBackup.pluginName];
+
+        renderer.setObjectRenderer(plugin$1);
+        plugin$1.render(sprite);
 
         return;
     }
@@ -948,14 +951,20 @@ LightTarget.prototype._renderWebGL = function _renderWebGL (renderer)
 
         sprite._texture = normalTexture;
 
-        renderer.setObjectRenderer(renderer.plugins.sprite);
-        renderer.plugins.sprite.render(sprite);
+        var plugin$2 = renderer.plugins.sprite;
+        // const plugin = renderer.plugins[sprite._lightingBackup.pluginName];
+
+        renderer.setObjectRenderer(plugin$2);
+        plugin$2.render(sprite);
 
         return;
     }
 
-    renderer.setObjectRenderer(renderer.plugins.lightSprite);
-    renderer.plugins.lightSprite.render(sprite);
+    var plugin = renderer.plugins.lightSprite;
+    // const plugin = renderer.plugins[LightSpriteRenderer.pluginName];
+
+    renderer.setObjectRenderer(plugin);
+    plugin.render(sprite);
 };
 
 // export * from './main';
